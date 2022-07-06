@@ -19,8 +19,8 @@ def input_int(prompt):
             print("That was not an integer. Please try again!")
     return input_value
 
-frame_size = InputInt("Enter the output peptide length:")
-overlap_size = InputInt("Enter the number of residues to overlap by:")
+frame_size = input_int("Enter the output peptide length:  ")
+overlap_size = input_int("Enter the number of residues to overlap by:  ")
 
 peptide_dict = {}
 
