@@ -3,6 +3,12 @@
 import numpy as np
 import pandas as pd
 import math
+import os
+
+print("Protein2Array")
+print("------------------")
+print("This script generates overlapping peptide sequences for array synthesis from a user-inputted protein sequence.")
+print("------------------")
 
 print("Please place your protein's sequence in a text file on a single line with no other characters.")
 sequence_filename = input("Input the filename:  ")
@@ -46,4 +52,10 @@ while not end_reached:
 
 dataframe = pd.Series(peptide_dict, name = "Peptide_Sequence")
 dataframe.index.name = "Peptide"
-dataframe.to_csv(sequence_filename[:-4] + "_array_peptides.csv")
+output_filename = sequence_filename[:-4] + "_array_peptides.csv"
+dataframe.to_csv(output_filename)
+
+current_directory = os.getcwd()
+output_path = os.path.join(current_directory, output_filename)
+
+print("Success! Results path: ", output_path)
