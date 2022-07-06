@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import math
 
-print("Please place your protein's sequence in a text file on a single line with no other characters. Must be in the same directory as this script.")
+print("Please place your protein's sequence in a text file on a single line with no other characters.")
 sequence_filename = input("Input the filename:  ")
 
 with open(sequence_filename, "r") as file: 
@@ -25,9 +25,9 @@ overlap_size = InputInt("Enter the number of residues to overlap by:")
 
 peptide_dict = {}
 
-end_reached = "No"
+end_reached = False
 start_position = 0
-while end_reached != "Yes": 
+while not end_reached: 
 	remaining_sequence = sequence[start_position:]
 	remaining_length = len(remaining_sequence)
 	if remaining_length >= frame_size: 
@@ -41,9 +41,9 @@ while end_reached != "Yes":
 		pep_name = sequence_filename[:-4] + "_" + str(len(sequence) - frame_size) + "_" + str(len(sequence))
 		#print("pep_name =", pep_name, "and pep_seq =", pep_seq)
 		peptide_dict[pep_name] = pep_seq
-		end_reached = "Yes"
+		end_reached = True
 	else: 
-		end_reached = "Yes"
+		end_reached = True
 
 dataframe = pd.Series(peptide_dict, name = "Peptide_Sequence")
 dataframe.index.name = "Peptide"
