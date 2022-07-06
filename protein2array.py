@@ -23,7 +23,7 @@ def InputInt(prompt):
 frame_size = InputInt("Enter the output peptide length:")
 overlap_size = InputInt("Enter the number of residues to overlap by:")
 
-peptide_list = []
+peptide_dict = {}
 
 end_reached = "No"
 start_position = 0
@@ -32,16 +32,19 @@ while end_reached != "Yes":
 	remaining_length = len(remaining_sequence)
 	if remaining_length >= frame_size: 
 		pep_seq = sequence[start_position : start_position + frame_size]
-		print(pep_seq)
-		peptide_list.append(pep_seq)
+		pep_name = sequence_filename[:-4] + "_" + str(start_position) + "_" + str(start_position + frame_size)
+		#print("pep_name =", pep_name, "and pep_seq =", pep_seq)
+		peptide_dict[pep_name] = pep_seq
 		start_position += overlap_size
 	elif remaining_length >= 1: 
 		pep_seq = sequence[(-1 * frame_size) :]
-		print(pep_seq)
-		peptide_list.append(pep_seq)
+		pep_name = sequence_filename[:-4] + "_" + str(len(sequence) - frame_size) + "_" + str(len(sequence))
+		#print("pep_name =", pep_name, "and pep_seq =", pep_seq)
+		peptide_dict[pep_name] = pep_seq
 		end_reached = "Yes"
 	else: 
 		end_reached = "Yes"
 
-dataframe = pd.DataFrame(peptide_list, columns = ["Peptide_Sequence"])
+dataframe = pd.Series(peptide_dict, name = "Peptide_Sequence")
+dataframe.index.name = "Peptide"
 dataframe.to_csv(sequence_filename[:-4] + "_array_peptides.csv")
