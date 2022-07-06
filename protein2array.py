@@ -10,15 +10,14 @@ sequence_filename = input("Input the filename:  ")
 with open(sequence_filename, "r") as file: 
 	sequence = file.read().rstrip()
 
-def InputInt(prompt): 
-	value = ""
-	while value is not int: 
-		value = input(prompt + "  ")
-		try: 
-			value = int(value)
-			return value
-		except:
-			print("That was not an integer! Please try again.")
+def input_int(prompt):
+    input_value = False
+    while not isinstance(input_value, int) or not input_value:
+        try:
+            input_value = int(input(prompt))
+        except ValueError:
+            print("That was not an integer. Please try again!")
+    return input_value
 
 frame_size = InputInt("Enter the output peptide length:")
 overlap_size = InputInt("Enter the number of residues to overlap by:")
