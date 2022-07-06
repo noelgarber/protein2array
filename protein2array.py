@@ -23,11 +23,6 @@ def InputInt(prompt):
 frame_size = InputInt("Enter the output peptide length:")
 overlap_size = InputInt("Enter the number of residues to overlap by:")
 
-# number_of_peptides = (len(sequence) / overlap_size) - ((frame_size / overlap_size) - 1)
-# number_of_peptides = math.ceil(number_of_peptides)
-
-# peptide_indices = np.arange(number_of_peptides)
-
 peptide_list = []
 
 end_reached = "No"
