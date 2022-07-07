@@ -26,7 +26,7 @@ def input_int(prompt):
     return input_value
 
 frame_size = input_int("Enter the output peptide length:  ")
-overlap_size = input_int("Enter the number of residues to overlap by:  ")
+step_size = input_int("Enter the step size (= length - overlap):  ")
 
 peptide_dict = {}
 
@@ -40,7 +40,7 @@ while not end_reached:
 		pep_name = sequence_filename[:-4] + "_" + str(start_position) + "_" + str(start_position + frame_size)
 		#print("pep_name =", pep_name, "and pep_seq =", pep_seq)
 		peptide_dict[pep_name] = pep_seq
-		start_position += overlap_size
+		start_position += step_size
 	elif remaining_length >= 1: 
 		pep_seq = sequence[(-1 * frame_size) :]
 		pep_name = sequence_filename[:-4] + "_" + str(len(sequence) - frame_size) + "_" + str(len(sequence))
